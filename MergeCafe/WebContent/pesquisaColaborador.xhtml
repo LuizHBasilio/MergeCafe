@@ -1,0 +1,102 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templatePrincipal.xhtml">
+	<ui:define name="cabecalho">
+		<h1 class="teste">Pesquisar Clientes</h1>
+	</ui:define>
+	<ui:define name="conteudo">
+		<p:growl id="growl" showDetail="true" />
+
+		<p:panelGrid style="width: 100%">
+			<p:row>
+				<p:column>
+					<p:outputLabel value="CPF:" />
+				</p:column>
+				<p:column colspan="3">
+					<p:inputText value="#{ColaboradorBean.colaborador.cpf}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Nome:" />
+				</p:column>
+				<p:column>
+					<p:inputText value="#{ColaboradorBean.colaborador.nome}" />
+				</p:column>
+				<p:column>
+					<p:outputLabel value="Opção:" />
+				</p:column>
+				<p:column>
+					<p:selectOneMenu value="#{ColaboradorBean.opcao.opcao}">
+						<f:selectItem itemLabel="Selecione um" itemValue="" />
+						<f:selectItem itemLabel="Fruta" itemValue="Fruta" />
+						<f:selectItem itemLabel="Iogurte" itemValue="Iogurte" />
+						<f:selectItem itemLabel="Cereal" itemValue="Cereal" />
+						<f:selectItem itemLabel="Pão" itemValue="Pao" />
+						<f:selectItem itemLabel="Suco" itemValue="Suco" />
+						<f:selectItem itemLabel="Chá" itemValue="Cha" />
+						<f:selectItem itemLabel="Géleia" itemValue="Geleia" />
+						<f:selectItem itemLabel="Leite" itemValue="Leite" />
+						<f:selectItem itemLabel="Torrada" itemValue="Torrada" />
+						<f:selectItem itemLabel="Queijo" itemValue="Queijo" />
+						<f:selectItem itemLabel="Manteiga" itemValue="Manteiga" />
+						<f:selectItem itemLabel="Biscoito" itemValue="Biscoito" />
+					</p:selectOneMenu>
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column colspan="4">
+					<p:commandButton value="PESQUISAR" update="@form"
+						actionListener="#{ColaboradorBean.pesquisarColaborador}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column colspan="4">
+					<p:fieldset legend="Colaboradores">
+						<p:panelGrid style="width: 100%">
+							<p:row>
+								<p:column colspan="3">
+									<p:dataTable value="#{ColaboradorBean.listaColaboradores}"
+										var="colaboradorGrid">
+										<p:column headerText="CPF">
+											<h:outputText value="#{colaboradorGrid.cpf}" />
+										</p:column>
+										<p:column headerText="Nome">
+											<h:outputText value="#{colaboradorGrid.nome}" />
+										</p:column>
+										<p:column headerText="Opção">
+											<h:outputText value="#{colaboradorGrid.opcao}" />
+										</p:column>
+										<p:column headerText="#">
+											<p:commandButton value="Editar" update="@form"
+												action="#{ColaboradorBean.editarColaborador}">
+												<f:setPropertyActionListener
+													target="#{ColaboradorBean.cpfSelecionado}"
+													value="#{colaboradorGrid.cpf}" />
+											</p:commandButton>
+										</p:column>
+										<p:column headerText="#">
+											<p:commandButton value="Remover" update="@form"
+												action="#{ColaboradorBean.removerColaborador}">
+												<f:setPropertyActionListener
+													target="#{ColaboradorBean.cpfSelecionado}"
+													value="#{colaboradorGrid.cpf}" />
+											</p:commandButton>
+										</p:column>
+									</p:dataTable>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:fieldset>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+	</ui:define>
+</ui:composition>
+
+</html>

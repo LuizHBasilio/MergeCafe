@@ -1,0 +1,101 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templatePrincipal.xhtml">
+	<ui:define name="cabecalho">
+		<h1 class="teste">Cadastro do café da manhã</h1>
+	</ui:define>
+	<ui:define name="conteudo">
+		<f:metadata>
+			<f:viewAction action="#{ColaboradorBean.inicializarCampos}" />
+		</f:metadata>
+		<p:growl id="growl" showDetail="true" />
+
+		<p:panelGrid style="width: 100%">
+			<p:row>
+				<p:column>
+					<p:outputLabel value="CPF:" />
+				</p:column>
+				<p:column colspan="3">
+					<p:inputText maxlength="11"
+						value="#{ColaboradorBean.colaborador.cpf}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Nome:" />
+				</p:column>
+				<p:column colspan="3">
+					<p:inputText value="#{ColaboradorBean.colaborador.nome}" />
+				</p:column>
+			</p:row>
+
+
+			<p:row>
+				<p:column colspan="4">
+					<p:fieldset legend="Opções">
+						<p:panelGrid style="width: 100%">
+							<p:row>
+								<p:column>
+									<p:outputLabel value="Opcões:" />
+									<p:selectOneMenu value="#{ColaboradorBean.opcao.opcao}">
+										<f:selectItem itemLabel="Fruta" itemValue="Fruta" />
+										<f:selectItem itemLabel="Iogurte" itemValue="Iogurte" />
+										<f:selectItem itemLabel="Cereal" itemValue="Cereal" />
+										<f:selectItem itemLabel="Pão" itemValue="Pao" />
+										<f:selectItem itemLabel="Suco" itemValue="Suco" />
+										<f:selectItem itemLabel="Chá" itemValue="Cha" />
+										<f:selectItem itemLabel="Géleia" itemValue="Geleia" />
+										<f:selectItem itemLabel="Leite" itemValue="Leite" />
+										<f:selectItem itemLabel="Torrada" itemValue="Torrada" />
+										<f:selectItem itemLabel="Queijo" itemValue="Queijo" />
+										<f:selectItem itemLabel="Manteiga" itemValue="Manteiga" />
+										<f:selectItem itemLabel="Biscoito" itemValue="Biscoito" />
+									</p:selectOneMenu>
+								</p:column>
+
+								<p:column>
+									<p:commandButton value="Adicionar" update="@form"
+										actionListener="#{ColaboradorBean.adicionarOpcao}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column colspan="3">
+									<p:dataTable value="#{ColaboradorBean.colaborador.listaOpcoes}"
+										var="opcaoGrid">
+										<p:column headerText="Opção">
+											<h:outputText value="#{opcaoGrid.opcao}" />
+										</p:column>
+
+										<p:column>
+											<p:commandButton value="remover" update="@form"
+												action="#{ColaboradorBean.removerOpcao}">
+												<f:setPropertyActionListener
+													target="#{ColaboradorBean.opcaoSel}"
+													value="#{opcaoGrid.opcao}" />
+											</p:commandButton>
+										</p:column>
+									</p:dataTable>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:fieldset>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column colspan="4">
+					<p:commandButton value="SALVAR" update="@form"
+						actionListener="#{ColaboradorBean.salvar}" />
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+
+
+
+	</ui:define>
+</ui:composition>
+
+</html>
