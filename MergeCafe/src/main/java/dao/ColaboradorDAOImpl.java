@@ -47,8 +47,8 @@ public class ColaboradorDAOImpl implements ColaboradorDAO {
 
 	@Override
 	public List<Colaborador> pesquisarColaborador(Colaborador colaborador, Opcao opcao) {
-		String sql = "Select distinct cl from Colaborador cl ";
-
+		String sql = "Select distinct cl from Colaborador cl, Opcao op " + " where cl.cpf = op.colaborador.cpf " + montarWhere(colaborador, opcao); 
+				
 		EntityManager ent = JpaUtil.getEntityManager();
 
 		Query query = ent.createQuery(sql);
