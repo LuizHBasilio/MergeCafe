@@ -42,12 +42,7 @@
 			<artifactId>primefaces</artifactId>
 			<version>6.2</version>
 		</dependency>
-		<!-- ORACLE -->
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.2.0</version>
-		</dependency>
+
 		<!-- PROVIDER JPA(HIBERNATE) -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
